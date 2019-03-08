@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TryWorkManager</string>
+    <string name="load_dic">Select Dictionary</string>
+</resources>
