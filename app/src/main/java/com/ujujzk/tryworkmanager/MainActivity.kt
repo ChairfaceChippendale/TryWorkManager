@@ -14,11 +14,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.ujujzk.tryworkmanager.databinding.ActivityMainBinding
+import java.io.File
+import java.nio.charset.Charset
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
         const val REQUEST_CODE_FILE = 100
+
+        const val DICTIONARY_NAME_SEARCHING_ROW_NUMBER = 10
+        const val DICTIONARY_NAME_TAG_IN_FILE = "#NAME"
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -45,12 +51,12 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE_FILE && data != null) {
 
-            handleImageRequestResult(data)
+            handleFileRequestResult(data)
         }
     }
 
 
-    private fun handleImageRequestResult(data: Intent) {
+    private fun handleFileRequestResult(data: Intent) {
         val uri =
             when {
                 data.clipData != null -> data.clipData?.getItemAt(0)?.uri
@@ -60,10 +66,33 @@ class MainActivity : AppCompatActivity() {
 
         if (uri != null && uri.path?.endsWith(".dsl") == true) {
             Log.w("TAG", uri.path)
+            readFile (uri)
         } else {
             Snackbar.make(binding.root, "Wrong file type", Snackbar.LENGTH_SHORT).show()
         }
 
+
+    }
+
+
+    private fun readFile (uri: Uri) {
+
+
+        val scanner = Scanner(contentResolver.openInputStream(uri), Charset.forName("UTF-16").name())
+        var line: String
+        for (i in 0..DICTIONARY_NAME_SEARCHING_ROW_NUMBER){
+            if (scanner.hasNext()){
+                line = scanner.nextLine().trim()
+                Log.w("TAG", "Line $i is $line")
+                if (line.startsWith(DICTIONARY_NAME_TAG_IN_FILE)) {
+                    Log.w("TAG", "Name of new dictionary is ${line.replace(DICTIONARY_NAME_TAG_IN_FILE, "").replace("\"", "").trim()}")
+                    break
+                }
+            } else {
+                break
+            }
+        }
+        scanner.close()
 
     }
 
