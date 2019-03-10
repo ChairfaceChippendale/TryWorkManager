@@ -50,6 +50,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.0,0'
     implementation 'androidx.lifecycle:lifecycle-livedata:2.0.0'
 
-    implementation "android.arch.work:work-runtime:1.0.0"
+    implementation "android.arch.work:work-runtime-ktx:1.0.0"
     implementation "android.arch.work:work-rxjava2:1.0.0"
 }
