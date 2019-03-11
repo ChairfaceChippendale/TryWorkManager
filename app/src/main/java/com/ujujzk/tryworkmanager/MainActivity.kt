@@ -14,8 +14,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.ujujzk.tryworkmanager.databinding.ActivityMainBinding
 import com.ujujzk.tryworkmanager.workers.ParseDictionaryWorker
 import com.ujujzk.tryworkmanager.workers.ParseDictionaryWorker.Companion.DICTIONARY_NAME_TAG_IN_FILE
-import java.io.File
-import java.net.URI
 import java.nio.charset.Charset
 import java.util.*
 
@@ -93,7 +91,6 @@ class MainActivity : AppCompatActivity() {
     private fun readFile (uri: Uri) {
 
         val rui = Uri.parse(uri.toString())
-//        val rui = Uri.fromFile(File(URI(uri.path)))
 
         val scanner = Scanner(contentResolver.openInputStream(rui), Charset.forName("UTF-16").name())
         var line: String

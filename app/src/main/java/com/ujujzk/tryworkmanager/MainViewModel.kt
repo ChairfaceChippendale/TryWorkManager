@@ -3,10 +3,7 @@ package com.ujujzk.tryworkmanager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkInfo
-import androidx.work.WorkManager
-import androidx.work.workDataOf
+import androidx.work.*
 import com.ujujzk.tryworkmanager.workers.ParseDictionaryWorker
 
 

@@ -52,4 +52,7 @@ dependencies {
 
     implementation "android.arch.work:work-runtime-ktx:1.0.0"
     implementation "android.arch.work:work-rxjava2:1.0.0"
+
+
+    androidTestImplementation "android.arch.work:work-testing:1.0.0"
 }
